@@ -6,6 +6,7 @@
 \RequirePackage{calc}
 \RequirePackage{fancyhdr}
 \RequirePackage[strict]{changepage}
+\RequirePackage{graphicx}
 
 % Option for no abstract
 \newif\ifabstract
