@@ -1,0 +1,88 @@
+\documentclass{beamer}
+
+\usepackage{multicol}
+\usepackage{lipsum}
+
+%% EPFL beamer theme
+\usetheme{epfl}
+\setbeamercolor{structure}{fg=red}
+
+%% Mandatory variables
+\author{Jane Doe}
+\title{A really cool presentation}
+\date{10 August 2016}
+
+%% Optional variables
+\supervisors{\parbox[t]{0.4\linewidth}{\raggedleft Some cool people}}
+
+\institute[Awesome institute short]{Awesome institute with a reaaaaaallllllyyyyy long name}
+
+\AtBeginSection[]{%
+  \subsection*{Outline}
+  \begin{frame}{~}
+    \makebox[\linewidth][c]{%
+      \begin{minipage}[t][4cm][t]{\textwidth}
+        \begin{multicols}{2}
+          \tableofcontents[currentsection,
+            currentsubsection,
+            subsectionstyle=show/show/shaded,
+          sectionstyle=show/shaded]
+        \end{multicols}
+
+      \end{minipage}%
+    }%
+  \end{frame}
+}
+
+\begin{document}
+\frame[plain,noframenumbering]{\maketitle}
+
+\section{Introduction}
+\subsection{One subsection}
+\begin{frame}{Itemize}
+  \begin{itemize}
+    \item Here you can see an itemization
+      \begin{itemize}
+        \item It has items
+          \begin{itemize}
+            \item The items are below each other
+          \end{itemize}
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Enumerate}
+  \begin{enumerate}
+    \item Here you can see an enumeration
+    \item It has items
+    \item The items are numbered
+  \end{enumerate}
+  \[
+    f(x)=\sum_{i=0}^\infty \frac{f^{(i)}(x_0)}{i!}(x-x_0)^i
+  \]
+\end{frame}
+
+\subsection{New Subsection}
+\begin{frame}{Theorems and environments}
+  \begin{theorem}[Sample theorem]
+    This presentation is essentially useless.
+  \end{theorem}
+  \begin{proof}
+    This proof is essentially incorrect.
+  \end{proof}
+\end{frame}
+
+\begin{frame}{Example slide with Title}
+  \begin{example}
+    Major problem.
+  \end{example}
+  \begin{solution}
+    Minor nuisance.
+  \end{solution}
+\end{frame}
+
+\begin{frame}[plain]{Plain frame with title}
+  \lipsum[1]
+\end{frame}
+
+\end{document}

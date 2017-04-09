@@ -1,0 +1,134 @@
+% EPFL ASL Beamer theme
+% Written by Katie Jones
+% 2016/08/01
+
+\ProvidesPackage{beamerthemeepfl}[2016/08/09]
+
+\RequirePackage{tikz}
+\RequirePackage{iftex}
+\RequirePackage[export]{adjustbox}
+\RequirePackage{etoolbox}
+
+\usetikzlibrary{calc}
+
+\AtBeginDocument{\setbeamertemplate{logo}{}}
+
+\def\itemcolor{itemsblue}
+\DeclareOption{itemsblack}{\def\itemcolor{itemsblack}}
+\DeclareOption{itemsblue}{\def\itemcolor{itemsblue}}
+\def\titlecolor{titlesblack}
+\DeclareOption{titlesblack}{\def\titlecolor{titlesblack}}
+\DeclareOption{titlesblue}{\def\titlecolor{titlesblue}}
+\ProcessOptions
+
+\newif\ifprintsectiontitle\printsectiontitletrue
+
+\usecolortheme[\itemcolor,\titlecolor]{epfl}
+\usefonttheme{epfl}
+
+\newcommand{\@supervisor}{}
+\newcommand{\supervisor}[1]{\renewcommand{\@supervisor}{Supervisor: #1}}
+\newcommand{\supervisors}[1]{\renewcommand{\@supervisor}{Supervisors: #1}}
+
+\newcommand{\@projecttype}{}
+\newcommand{\projecttype}[1]{\renewcommand{\@projecttype}{#1}}
+
+\def\@logofilename{}
+\def\logofilename#1{\gdef\@logofilename{#1}}
+
+% Sizes
+\setbeamersize{text margin left=0.05\paperwidth, text margin right=0.05\paperwidth}
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{itemize items}[circle]
+\setbeamertemplate{background canvas}[vertical shading][bottom=white,top=white]
+
+
+\setbeamertemplate{footline}{
+  \centering
+  \parbox{\linewidth}{
+    \insertauthor~~|~~\insertdate
+    \hfill
+    {\usebeamercolor[fg]{page number in head/foot}\insertframenumber}~/~\inserttotalframenumber}\\[1em]
+}
+
+\newlength{\ruleheight}
+\newlength{\rulewidth}
+\setlength{\ruleheight}{0.5mm}
+\setlength{\rulewidth}{0.75\linewidth}
+
+\setbeamertemplate{title page}{
+\usebeamercolor{title page}
+  %\leavevmode
+  \ifx\@logofilename\empty%
+  \else
+  \includegraphics[height=0.1\paperheight]{\@logofilename}
+  \fi
+  \hfill
+  \includegraphics[height=0.1\paperheight]{epfl.pdf}\\[1em]
+  \raggedleft
+  %% Title
+  {\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle\par}
+  \settowidth{\rulewidth}{\inserttitle}
+  {\hfill\usebeamercolor[bg]{title page}\rule{\rulewidth}{\ruleheight}\\[0.5em]}
+  {%% Subtitle
+    \ifx\insertsubtitle\@empty%
+    \else%
+    \usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par
+    \fi%
+  }
+  %% Author
+  {\usebeamercolor{author}\usebeamerfont{author}\insertauthor}\par
+  \vfill
+  %% Type of project
+  \ifdefempty{\@projecttype}{}{
+  {\usebeamercolor{institute}\usebeamerfont{institute}\@projecttype}}
+  \ifdefempty{\insertinstitute}{}{
+    {\usebeamercolor{institute}\usebeamerfont{institute}\insertinstitute}\\}
+  {\usebeamercolor{institute}\usebeamerfont{institute}\@supervisor}
+  %% Date
+  \vfill
+  {\usebeamercolor{date}\usebeamerfont{date} \insertdate}\par
+}
+
+\newlength{\widthofcurrentsection}
+\setbeamertemplate{section in head/foot}{
+  \settowidth{\widthofcurrentsection}{\insertsectionhead\quad}
+  \begin{beamercolorbox}[center,dp=0.5ex,ht=2ex,wd=\widthofcurrentsection]{section in head/foot} 
+    \usebeamercolor[fg]{section in head/foot}\usebeamerfont{section in head/foot}\insertsectionhead
+  \end{beamercolorbox}
+}
+
+\setbeamertemplate{section in head/foot shaded}{
+  \usebeamerfont{section in head/foot shaded}\usebeamercolor[fg]{section in head/foot shaded}\insertsectionhead
+}
+
+\setbeamertemplate{headline}{
+  \vspace{1em}
+  \centering
+  \begin{minipage}{\linewidth}
+    \ifx\@logofilename\empty%
+    \else%
+    \includegraphics[height=0.05\paperheight]{\@logofilename}
+    \fi
+    \hfill
+    \includegraphics[height=0.05\paperheight]{epfl.pdf}\\
+  \end{minipage}\\
+      % \insertsectionnavigationhorizontal{\paperwidth}{}{\hskip0pt plus1filll}
+      % \begin{beamercolorbox}[center]{subsection in head/foot}
+        % \insertsubsectionnavigationhorizontal{\paperwidth}{}{\hskip0pt plus1filll}
+      % \end{beamercolorbox}
+}
+
+
+\setbeamertemplate{frametitle}{
+  \ifprintsectiontitle%
+    {\usebeamercolor[fg]{frametitle}\usebeamerfont{frametitle}\insertsection: \insertsubsection\\}%
+    {\usebeamercolor[fg]{framesubtitle}\usebeamerfont{framesubtitle}\insertframetitle\par}%
+  \else%
+    {\usebeamercolor[fg]{frametitle}\usebeamerfont{frametitle}\insertframetitle\\}%
+  \ifdefempty{\insertframesubtitle}{}{%
+    {\usebeamercolor[fg]{framesubtitle}\usebeamerfont{framesubtitle}\insertframesubtitle\par}%
+  }%
+  \fi
+}
