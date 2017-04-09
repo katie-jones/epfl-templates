@@ -1,0 +1,70 @@
+\documentclass[doubleheaders,los,lof,lot,titlepage,oneside,openright,11pt]{epflthesis}
+
+\input{pkgs}
+
+\usepackage[a4paper,textheight=22cm,includehead,head=20pt]{geometry}
+\usepackage{booktabs}
+\usepackage{amsmath}
+
+
+% Set correct margin ratio for two-sided
+\makeatletter
+\if@twoside
+\geometry{hmarginratio=3:2}
+\fi
+\makeatother
+
+% Setting variables
+\author{Carol Brown}
+\advisor{Prof. Judy Lakewood}
+\title{My world-changing thesis}
+\submitdate{29 July 2016}
+\school{Ecole polytechnique fédérale de Lausanne}
+\dept{Mechanical Engineering}
+% \logo{logofile.png}
+\city{Lausanne}
+
+% Command to print list of symbols
+\printlos{%
+  \printglossary
+}
+
+\abstract{I am an abstract}
+
+\acknowledgements{I'd like to thank my wonderful boyfriend.}
+
+\numberwithin{equation}{chapter}
+
+\begin{document}
+
+\chapter{Chapter 1}
+\section{First Section}
+I am a section.
+
+\chapter{Chapter 2}
+\section{Second Section}
+I am a new chapter with a figure~\ref{fig:myfig} and a table~\ref{tab:mytab}.
+
+\begin{figure}
+  \centering
+  \huge FIGURE
+  \caption{A really big figure.}
+  \label{fig:myfig}
+\end{figure}
+
+\begin{table}
+  \begin{center}
+    \begin{tabular}{cc}
+      \toprule
+      Col 1 & Col 2 \\
+      \midrule
+      Some data & more data \\
+      \ldots & \ldots \\
+      \bottomrule
+    \end{tabular}
+    \caption{A really useless table.}
+    \label{tab:mytab}
+  \end{center}
+\end{table}
+
+\end{document}
